@@ -1,4 +1,6 @@
 using ExtremeVacation.Api.Data;
+using ExtremeVacation.Api.Repositories;
+using ExtremeVacation.Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExtremeVacation.Api
@@ -19,6 +21,8 @@ namespace ExtremeVacation.Api
             builder.Services.AddDbContextPool<ExtremeVacationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ExtremeVacationConnection"))
             );
+
+            builder.Services.AddScoped<ITripRepository, TripRepository>();
 
             var app = builder.Build();
 
