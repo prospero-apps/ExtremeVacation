@@ -2,6 +2,7 @@ using ExtremeVacation.Api.Data;
 using ExtremeVacation.Api.Repositories;
 using ExtremeVacation.Api.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Net.Http.Headers;
 
 namespace ExtremeVacation.Api
 {
@@ -32,6 +33,12 @@ namespace ExtremeVacation.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(policy =>
+                policy.WithOrigins("http://localhost:7162", "https://localhost:7162")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType)
+            );
 
             app.UseHttpsRedirection();
 

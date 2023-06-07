@@ -1,0 +1,48 @@
+﻿@page "/"
+@inherits TripsBase
+
+@if(Trips == null)
+{
+    <h3>Loading trips...</h3>
+}
+else
+{
+    <h1 class="mb-2">We're proud of our trips. Already planned your vacation?</h1>
+
+    <h3 class="mb-5">The following trips are now available...</h3>
+
+    var tripCount = Trips.Count();
+
+    @if (tripCount > 0)
+    {
+        const int itemsPerRow = 3;
+        var tripRow = new List<TripDto>();
+
+        @for (int i = 0; i < tripCount; i++)
+        {
+            tripRow = Trips.Skip(i * itemsPerRow).Take(itemsPerRow).ToList();
+
+            <div class="row mt-3">
+                @foreach(var item in tripRow)
+                {
+                    <div class="col-md-3 mb-2">
+                        <a href="#">
+                            <div class="card">
+                                <img class="img-thumbnail" src="@item.ImageURL">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-3">
+                                        @item.Name
+                                    </h5>
+                                    <p class="card-text">
+                                        <b>@item.Price.ToString("C")</b>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    }
+
+}

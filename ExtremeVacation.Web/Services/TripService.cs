@@ -22,7 +22,6 @@ namespace ExtremeVacation.Web.Services
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

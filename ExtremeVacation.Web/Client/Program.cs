@@ -1,4 +1,6 @@
 using ExtremeVacation.Web;
+using ExtremeVacation.Web.Services;
+using ExtremeVacation.Web.Services.Contracts;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -13,6 +15,7 @@ namespace ExtremeVacation.Web
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/") });
+            builder.Services.AddScoped<ITripService, TripService>();
 
             await builder.Build().RunAsync();
         }
