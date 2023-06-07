@@ -1,3 +1,6 @@
+using ExtremeVacation.Api.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace ExtremeVacation.Api
 {
     public class Program
@@ -12,6 +15,10 @@ namespace ExtremeVacation.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddDbContextPool<ExtremeVacationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ExtremeVacationConnection"))
+            );
 
             var app = builder.Build();
 
