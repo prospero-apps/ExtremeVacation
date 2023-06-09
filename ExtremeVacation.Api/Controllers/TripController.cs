@@ -43,7 +43,7 @@ namespace ExtremeVacation.Api.Controllers
             }
         }
 
-        [HttpGet("{id:int")]
+        [HttpGet("{id:int}")]
         public async Task<ActionResult<TripDto>> GetItem(int id)
         {
             try

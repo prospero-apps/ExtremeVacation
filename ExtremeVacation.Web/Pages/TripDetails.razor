@@ -1,0 +1,36 @@
+﻿@page "/TripDetails/{Id:int}"
+@inherits TripDetailsBase
+
+@if (Trip == null && ErrorMessage == null)
+{
+    <LoadingSpinner/>
+}
+else if (ErrorMessage != null)
+{
+    <ErrorDisplay ErrorMessage="@ErrorMessage"></ErrorDisplay>
+}
+else
+{
+    <h3 class="mb-5">@Trip.Name</h3>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <img class="img-fluid" src="@Trip.ImageURL">
+        </div>
+        <div class="col-md-6">
+            <p class="mb-4">Ready for an unforgettable <strong>@Trip.CategoryName.ToLower()</strong>?</p>
+            <p class="mb-4">Let us take you to @Trip.Destination this time.</p>
+            <p class="mb-4">@Trip.Description</p>
+            @if (Trip.ChanceOfSurvival > 50)
+            {
+                <p class="mb-4">This trip is rather safe. On average @Trip.ChanceOfSurvival% of tourists make it.</p>
+            }
+            else
+            {
+                <p class="mb-4">This trip is a bit risky. Only less than @Trip.ChanceOfSurvival% of tourists make it.</p>
+            }
+            <p class="mb-4">The main danger you may run into during this trip is @Trip.Danger.</p>
+            <p class="mb-4">The trip takes up to @Trip.Duration days (for those who make it).</p>
+            <p class="mb-4">Price: <strong>@Trip.Price.ToString("C0")</strong></p>
+        </div>
+    </div>
+}
