@@ -20,14 +20,16 @@ namespace ExtremeVacation.Api.Repositories
             return categories;
         }
 
-        public Task<TripCategory> GetCategory(int id)
+        public async Task<TripCategory> GetCategory(int id)
         {
-            throw new NotImplementedException();
+            var category = await extremeVacationDbContext.TripCategories.SingleOrDefaultAsync(c => c.Id == id);
+            return category;
         }
 
-        public Task<Trip> GetItem(int id)
+        public async Task<Trip> GetItem(int id)
         {
-            throw new NotImplementedException();
+            var trip = await extremeVacationDbContext.Trips.FindAsync(id);
+            return trip;
         }
 
         public async Task<IEnumerable<Trip>> GetItems()

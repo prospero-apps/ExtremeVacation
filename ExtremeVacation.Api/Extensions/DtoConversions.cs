@@ -26,5 +26,24 @@ namespace ExtremeVacation.Api.Extensions
                          CategoryName = tripCategory.Name
                      }).ToList();
         }
+
+        public static TripDto ConvertToDto(this Trip trip,
+            TripCategory tripCategory)
+        {
+            return new TripDto
+            {
+                Id = trip.Id,
+                Name = trip.Name,
+                Destination = trip.Destination,
+                Description = trip.Description,
+                Danger = trip.Danger,
+                ChanceOfSurvival = trip.ChanceOfSurvival,
+                ImageURL = trip.ImageURL,
+                Price = trip.Price,
+                Duration = trip.Duration,
+                CategoryId = trip.CategoryId,
+                CategoryName = tripCategory.Name
+            };
+        }
     }
 }
