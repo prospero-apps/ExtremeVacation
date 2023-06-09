@@ -1,0 +1,69 @@
+﻿.card-title,
+.card-text {
+    color: black;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover .card {
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.4), 0 6px 9px 0 rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s ease-in-out;
+    overflow: hidden;
+    height: 650px;
+    width: auto;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+a:hover img {
+    transform: scale(1.07);
+    transition: 0.5s ease-in-out;
+    border: 5px solid black;
+}
+
+img {
+    transition: 0.5s ease-in-out;
+    border-radius: 50%;
+    object-fit: cover;
+    height: 300px;
+    width: 300px;    
+    border: 1px solid gray;
+    align-self: center;
+    margin-top: 20px;
+}
+
+.price {
+    text-align: right;
+    font-size: 2em;
+    justify-self: flex-end;
+    margin-right: 1em;
+}
+
+.bargain {
+    color: green;
+}
+
+.attention {
+    color: red;
+}
+
+.small {
+    font-size: 0.8em;
+    justify-self: flex-end;
+}
+
+.attention::after {
+    content: " !!!";
+}

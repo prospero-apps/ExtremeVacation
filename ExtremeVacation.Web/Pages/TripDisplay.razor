@@ -1,0 +1,51 @@
+﻿@inherits TripDisplayBase
+
+@foreach (var item in Trips)
+{
+    <div class="col-md-3 mb-2">
+        <a href="#">
+            <div class="card">
+                <img class="img-thumbnail" src="@item.ImageURL">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">
+                        <strong>@item.Name</strong>
+                    </h4>
+                    
+                    <p class ="card-text"><strong>Destination:</strong> @item.Destination</p>
+
+                    @if(item.Description.Length > 150)
+                    {
+                        <p class="card-text">@item.Description[0..150]...</p>
+                    }
+                    else
+                    {
+                        <p class="card-text">@item.Description</p>
+                    }
+
+                    @if(item.ChanceOfSurvival < 50)
+                    {
+                        <p class="card-text small attention">Chances of survival: <strong>@item.ChanceOfSurvival%</strong></p>
+                    }
+                    else
+                    {
+                        <p class="card-text small">Chances of survival: @item.ChanceOfSurvival%</p>
+                    }                    
+                </div>
+                <div class="card-text price">
+                    @if (item.Price < 200)
+                    {
+                        <p class="bargain">
+                            <b>only @item.Price.ToString("C0")</b>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <b>@item.Price.ToString("C0")</b>
+                        </p>
+                    }
+                </div>
+            </div>
+        </a>
+    </div>
+}

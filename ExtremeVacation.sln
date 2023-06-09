@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtremeVacation.Web", "Extr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtremeVacation.Api", "ExtremeVacation.Api\ExtremeVacation.Api.csproj", "{C7A9C056-6D55-472E-AC71-046D39BFF333}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExtremeVacation.Models", "ExtremeVacation.Models\ExtremeVacation.Models.csproj", "{2155CAAD-5AF6-45F8-AFA2-178BB7B68AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExtremeVacation.Models", "ExtremeVacation.Models\ExtremeVacation.Models.csproj", "{2155CAAD-5AF6-45F8-AFA2-178BB7B68AE2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

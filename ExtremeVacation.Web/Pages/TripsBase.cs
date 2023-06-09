@@ -14,5 +14,18 @@ namespace ExtremeVacation.Web.Pages
         {
             Trips = await TripService.GetItems();
         }
+
+        protected IOrderedEnumerable<IGrouping<int, TripDto>> GetGroupedTripsByCategory() 
+        { 
+            return from trip in Trips
+                   group trip by trip.CategoryId into tripsByCategoryGroup
+                   orderby tripsByCategoryGroup.Key
+                   select tripsByCategoryGroup;
+        }
+
+        protected string GetCategoryName(IGrouping<int, TripDto> groupedTripDtos) 
+        {
+            return groupedTripDtos.FirstOrDefault(tg => tg.CategoryId == groupedTripDtos.Key).CategoryName;
+        }
     }
 }
