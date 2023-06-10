@@ -29,8 +29,16 @@ else
                 <p class="mb-4">This trip is a bit risky. Only less than @Trip.ChanceOfSurvival% of tourists make it.</p>
             }
             <p class="mb-4">The main danger you may run into during this trip is @Trip.Danger.</p>
-            <p class="mb-4">The trip takes up to @Trip.Duration days (for those who make it).</p>
             <p class="mb-4">Price: <strong>@Trip.Price.ToString("C0")</strong></p>
+            <p class="mb-4">Duration: up to @Trip.Duration days (for those who make it)</p>
+            <div>
+                <button class="btn btn-success"
+                    @onclick="() => AddToCart_Click(new CartItemToAddDto {
+                        CartId = HardCodedData.CartId,
+                        TripId = Trip.Id
+                    })"
+                >Add this Trip to Cart</button>
+            </div>
         </div>
     </div>
 }

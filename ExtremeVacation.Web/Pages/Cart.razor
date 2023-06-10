@@ -1,0 +1,56 @@
+﻿@page "/Cart"
+@inherits CartBase
+
+@if (CartItems == null && ErrorMessage == null)
+{
+    <LoadingSpinner/>
+}
+else if (ErrorMessage != null)
+{
+    <ErrorDisplay ErrorMessage="@ErrorMessage"></ErrorDisplay>
+}
+else
+{
+    @if(CartItems.Count() > 0)
+    {
+        <h3 class="mb-5">Your Cart Contains</h3>
+        <div class="row mb-5">
+            <div class="col-md-9">
+                @foreach (var item in CartItems)
+                {
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <img src="@item.TripImageURL" width="300" class="img-thumbnail">
+                        </div>
+                        <div class="col-md-8">
+                            <h5>@item.TripName</h5>
+                            <span>
+                                Price: <strong>@item.Price.ToString("C0")</strong> for @item.Duration days                                
+                            </span>
+                            <div>
+                                <button @onclick="(() => DeleteCartItem_Click(item.Id))"
+                                        class="btn btn-danger sm">
+                                    Cancel Until It's Too Late
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="col-md-3">
+                <h5>Cart Summary</h5>
+                <div class="mt-2">
+                    <div>Total Price: @TotalPrice</div>
+                    <a href="#" class="btn btn-success">
+                        Proceed - there is no return
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h3 class="mb-5">Your Cart is Empty</h3>
+    }
+
+}

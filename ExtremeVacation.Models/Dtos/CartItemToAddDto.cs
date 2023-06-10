@@ -10,6 +10,5 @@ namespace ExtremeVacation.Models.Dtos
     {
         public int CartId { get; set; }
         public int TripId { get; set; }
-        public int Duration { get; set; }
     }
 }

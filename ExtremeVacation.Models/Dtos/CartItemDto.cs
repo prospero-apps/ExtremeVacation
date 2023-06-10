@@ -16,7 +16,6 @@ namespace ExtremeVacation.Models.Dtos
         public string TripDescription { get; set; }
         public string TripImageURL { get; set; }
         public decimal Price { get; set; }
-        public decimal TotalPrice { get; set; }
         public int Duration { get; set; }
     }
 }

@@ -12,6 +12,12 @@ namespace ExtremeVacation.Web.Pages
         [Inject]
         public ITripService TripService { get; set; }
 
+        [Inject]
+        public ICartService CartService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         public TripDto Trip { get; set; }
 
         public string ErrorMessage { get; set; }
@@ -25,6 +31,20 @@ namespace ExtremeVacation.Web.Pages
             catch (Exception ex)
             {
                 ErrorMessage = ex.Message;
+            }
+        }
+
+        protected async Task AddToCart_Click(CartItemToAddDto cartItemToAddDto)
+        {
+            try
+            {
+                var cartItemDto = await CartService.AddItem(cartItemToAddDto);
+                NavigationManager.NavigateTo("/Cart");
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }

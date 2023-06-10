@@ -8,11 +8,20 @@ namespace ExtremeVacation.Web.Pages
     {
         [Inject]
         public ITripService TripService { get; set; }
+
+        [Inject]
+        public ICartService CartService { get; set; }
+
         public IEnumerable<TripDto> Trips { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
             Trips = await TripService.GetItems();
+
+            var cartItems = await CartService.GetItems(HardCodedData.UserId);
+            var totalTrips = cartItems.Count();
+
+            CartService.RaiseEventOnCartChanged(totalTrips);
         }
 
         protected IOrderedEnumerable<IGrouping<int, TripDto>> GetGroupedTripsByCategory() 

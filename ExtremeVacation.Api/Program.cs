@@ -24,6 +24,7 @@ namespace ExtremeVacation.Api
             );
 
             builder.Services.AddScoped<ITripRepository, TripRepository>();
+            builder.Services.AddScoped<ICartRepository, CartRepository>();
 
             var app = builder.Build();
 

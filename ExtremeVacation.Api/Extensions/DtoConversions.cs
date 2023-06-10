@@ -45,5 +45,41 @@ namespace ExtremeVacation.Api.Extensions
                 CategoryName = tripCategory.Name
             };
         }
+
+        public static IEnumerable<CartItemDto> ConvertToDto(this IEnumerable<CartItem> cartItems,
+            IEnumerable<Trip> trips)
+        {
+            return (from cartItem in cartItems
+                    join trip in trips
+                    on cartItem.TripId equals trip.Id
+                    select new CartItemDto
+                    {
+                        Id = cartItem.Id,
+                        TripId = cartItem.TripId,
+                        TripName = trip.Name,
+                        TripDestination = trip.Destination,
+                        TripDescription = trip.Description,
+                        TripImageURL = trip.ImageURL,
+                        Price = trip.Price,
+                        CartId = cartItem.CartId,
+                        Duration = cartItem.Duration
+                    }).ToList();
+        }
+
+        public static CartItemDto ConvertToDto(this CartItem cartItem, Trip trip)
+        {
+            return new CartItemDto
+            {
+                Id = cartItem.Id,
+                TripId = cartItem.TripId,
+                TripName = trip.Name,
+                TripDestination = trip.Destination,
+                TripDescription = trip.Description,
+                TripImageURL = trip.ImageURL,
+                Price = trip.Price,
+                CartId = cartItem.CartId,
+                Duration = cartItem.Duration
+            };
+        }
     }
 }
