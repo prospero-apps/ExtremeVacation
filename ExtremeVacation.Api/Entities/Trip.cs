@@ -1,4 +1,6 @@
-﻿namespace ExtremeVacation.Api.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ExtremeVacation.Api.Entities
 {
     public class Trip
     {
@@ -12,5 +14,8 @@
         public decimal Price { get; set; }
         public int Duration { get; set; }
         public int CategoryId { get; set; }
+
+        [ForeignKey("CategoryId")]
+        public TripCategory TripCategory { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@page "/Checkout"
+
+<h3>Thank you for your order</h3>
+<p>We know who you are and where you live.</p>
+@if(CartItems.Count() == 1)
+{
+    <p>We'll pick you up outside your house next Friday.</p>
+}
+else
+{
+    <p>Your first trip starts next Friday. We'll pick you up outside your house.</p>
+}
+
+<p>Payment in cash only (@PaymentAmount.ToString("C0")). Just bring the money with you. No guns allowed. Be alone.</p>
+
+
+@code {
+    protected IEnumerable<CartItemDto> CartItems { get; set; }
+    protected decimal PaymentAmount { get; set; }
+
+    [Inject]
+    public ICartService CartService { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            CartItems = await CartService.GetItems(HardCodedData.UserId);
+
+            if (CartItems != null)
+            {
+                PaymentAmount = CartItems.Sum(p => p.Price);
+            }
+        }
+        catch (Exception)
+        {
+            
+            throw;
+        }
+    }
+}

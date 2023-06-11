@@ -28,13 +28,26 @@ namespace ExtremeVacation.Api.Repositories
 
         public async Task<Trip> GetItem(int id)
         {
-            var trip = await extremeVacationDbContext.Trips.FindAsync(id);
+            var trip = await extremeVacationDbContext.Trips
+                                .Include(t => t.TripCategory)
+                                .SingleOrDefaultAsync(t => t.Id == id);
             return trip;
         }
 
         public async Task<IEnumerable<Trip>> GetItems()
         {
-            var trips = await this.extremeVacationDbContext.Trips.ToListAsync();
+            var trips = await this.extremeVacationDbContext.Trips
+                                .Include(t => t.TripCategory).ToListAsync();
+
+            return trips;
+        }
+
+        public async Task<IEnumerable<Trip>> GetItemsByCategory(int id)
+        {
+            var trips = await this.extremeVacationDbContext.Trips
+                                .Include(t => t.TripCategory)
+                                .Where(t => t.CategoryId == id).ToListAsync();
+
             return trips;
         }
     }

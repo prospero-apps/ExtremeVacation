@@ -1,0 +1,22 @@
+﻿@page "/TripsByCategory/{CategoryId:int}"
+@inherits TripsByCategoryBase
+
+@if(Trips == null && ErrorMessage == null)
+{
+    <LoadingSpinner/>
+}
+else if(ErrorMessage != null)
+{
+    <ErrorDisplay ErrorMessage="@ErrorMessage"/>
+}
+else
+{
+    <h3>@CategoryName</h3>
+
+    @if(Trips.Count() > 0)
+    {
+        <div class="row mt-3">
+            <TripDisplay Trips="@Trips"/>
+        </div>
+    }
+}

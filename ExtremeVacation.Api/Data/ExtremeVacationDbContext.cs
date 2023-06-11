@@ -273,22 +273,26 @@ namespace ExtremeVacation.Api.Data
             modelBuilder.Entity<TripCategory>().HasData(new TripCategory
             {
                 Id = 1,
-                Name = "City Vacation"
+                Name = "City Vacation",
+                IconCSS = "fa-solid fa-city"
             });
             modelBuilder.Entity<TripCategory>().HasData(new TripCategory
             {
                 Id = 2,
-                Name = "Mountains Vacation"
+                Name = "Mountains Vacation",
+                IconCSS = "fa-solid fa-mountain"
             });
             modelBuilder.Entity<TripCategory>().HasData(new TripCategory
             {
                 Id = 3,
-                Name = "Seaside Vacation"
+                Name = "Seaside Vacation",
+                IconCSS = "fa-solid fa-person-swimming"
             });
             modelBuilder.Entity<TripCategory>().HasData(new TripCategory
             {
                 Id = 4,
-                Name = "Horror Vacation"
+                Name = "Horror Vacation",
+                IconCSS = "fa-solid fa-ghost"
             });
         }
 

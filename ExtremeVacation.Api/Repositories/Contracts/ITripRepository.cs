@@ -8,5 +8,6 @@ namespace ExtremeVacation.Api.Repositories.Contracts
         Task<IEnumerable<TripCategory>> GetCategories();
         Task<Trip> GetItem(int id);
         Task<TripCategory> GetCategory(int id);
+        Task<IEnumerable<Trip>> GetItemsByCategory(int id);
     }
 }

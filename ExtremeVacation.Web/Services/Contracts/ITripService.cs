@@ -6,5 +6,7 @@ namespace ExtremeVacation.Web.Services.Contracts
     {
         Task<IEnumerable<TripDto>> GetItems();
         Task<TripDto> GetItem(int id);
+        Task<IEnumerable<TripCategoryDto>> GetTripCategories();
+        Task<IEnumerable<TripDto>> GetItemsByCategory(int categoryId);
     }
 }

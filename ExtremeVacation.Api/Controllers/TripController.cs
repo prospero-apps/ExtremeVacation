@@ -68,5 +68,42 @@ namespace ExtremeVacation.Api.Controllers
                     "Server error retrieving data from the database");
             }
         }
+
+        [HttpGet]
+        [Route(nameof(GetTripCategories))]
+        public async Task<ActionResult<IEnumerable<TripCategoryDto>>> GetTripCategories()
+        {
+            try
+            {
+                var tripCategories = await tripRepository.GetCategories();
+                var tripCategoryDtos = tripCategories.ConvertToDto();
+
+                return Ok(tripCategoryDtos);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Server error retrieving data from the database");
+            }
+        }
+
+        [HttpGet]
+        [Route("{categoryId}/GetItemsByCategory")]
+        public async Task<ActionResult<IEnumerable<TripDto>>> GetItemsByCategory(int categoryId)
+        {
+            try
+            {
+                var trips = await tripRepository.GetItemsByCategory(categoryId);
+                var tripCategories = await tripRepository.GetCategories();
+                var tripDtos = trips.ConvertToDto(tripCategories);
+
+                return Ok(tripDtos);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Server error retrieving data from the database");
+            }
+        }
     }
 }

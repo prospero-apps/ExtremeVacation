@@ -3,6 +3,7 @@ using ExtremeVacation.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExtremeVacation.Api.Migrations
 {
     [DbContext(typeof(ExtremeVacationDbContext))]
-    partial class ExtremeVacationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611121907_AddTripCategoryIcons")]
+    partial class AddTripCategoryIcons
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -356,7 +359,7 @@ namespace ExtremeVacation.Api.Migrations
                         new
                         {
                             Id = 2,
-                            IconCSS = "fa-solid fa-mountain",
+                            IconCSS = "fa-solid fa-mountain-sun",
                             Name = "Mountains Vacation"
                         },
                         new

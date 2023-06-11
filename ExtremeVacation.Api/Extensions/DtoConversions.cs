@@ -5,12 +5,20 @@ namespace ExtremeVacation.Api.Extensions
 {
     public static class DtoConversions
     {
-        public static IEnumerable<TripDto> ConvertToDto(this IEnumerable<Trip> trips,
-            IEnumerable<TripCategory> tripCategories)
+        public static IEnumerable<TripCategoryDto> ConvertToDto(this IEnumerable<TripCategory> tripCategories)
+        {
+            return (from tripCategory in tripCategories
+                    select new TripCategoryDto
+                    {
+                        Id = tripCategory.Id,
+                        Name = tripCategory.Name,
+                        IconCSS = tripCategory.IconCSS,
+                    }).ToList();
+        }
+
+        public static IEnumerable<TripDto> ConvertToDto(this IEnumerable<Trip> trips)
         {
             return  (from Trip trip in trips
-                     join tripCategory in tripCategories
-                     on trip.CategoryId equals tripCategory.Id
                      select new TripDto
                      {
                          Id = trip.Id,
@@ -22,13 +30,12 @@ namespace ExtremeVacation.Api.Extensions
                          ImageURL = trip.ImageURL,
                          Price = trip.Price,
                          Duration = trip.Duration,
-                         CategoryId = trip.CategoryId,
-                         CategoryName = tripCategory.Name
+                         CategoryId = trip.TripCategory.Id,
+                         CategoryName = trip.TripCategory.Name
                      }).ToList();
         }
 
-        public static TripDto ConvertToDto(this Trip trip,
-            TripCategory tripCategory)
+        public static TripDto ConvertToDto(this Trip trip)
         {
             return new TripDto
             {
@@ -41,8 +48,8 @@ namespace ExtremeVacation.Api.Extensions
                 ImageURL = trip.ImageURL,
                 Price = trip.Price,
                 Duration = trip.Duration,
-                CategoryId = trip.CategoryId,
-                CategoryName = tripCategory.Name
+                CategoryId = trip.TripCategory.Id,
+                CategoryName = trip.TripCategory.Name
             };
         }
 

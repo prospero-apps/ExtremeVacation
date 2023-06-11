@@ -1,6 +1,9 @@
-﻿<div class="top-row ps-3 navbar navbar-dark">
+﻿@implements IDisposable
+@inject ICartService cartService
+
+<div class="top-row ps-3 navbar navbar-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="">ExtremeVacation.Web</a>
+        <a class="navbar-brand" href="">Extreme Vacation</a>
         <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,17 +14,15 @@
     <nav class="flex-column">
         <div class="nav-item px-3">
             <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
+                <span class="fas fa-home" aria-hidden="true"></span>&nbsp;Home
             </NavLink>
         </div>
+
+        <TripCategoriesMenu/>
+
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="Cart">
+                <span class="fas fa-shopping-cart" aria-hidden="true"></span>&nbsp;Cart (<strong>@cartItemsCount</strong>)
             </NavLink>
         </div>
     </nav>
@@ -32,8 +33,26 @@
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    private int cartItemsCount = 0;
+
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+    protected override void OnInitialized()
+    {
+        cartService.OnCartChanged += CartChanged;
+    }
+
+    private void CartChanged (int totalTrips)
+    {
+        cartItemsCount = totalTrips;
+        StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        cartService.OnCartChanged -= CartChanged;
     }
 }
