@@ -12,16 +12,33 @@ namespace ExtremeVacation.Web.Pages
         [Inject]
         public ICartService CartService { get; set; }
 
+        [Inject]
+        public IManageTripsLocalStorageService ManageTripsLocalStorageService { get; set; }
+
+        [Inject]
+        public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
+
         public IEnumerable<TripDto> Trips { get; set; }
+        public string ErrorMessage { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            Trips = await TripService.GetItems();
+            try
+            {
+                await ClearLocalStorage();
 
-            var cartItems = await CartService.GetItems(HardCodedData.UserId);
-            var totalTrips = cartItems.Count();
+                Trips = await ManageTripsLocalStorageService.GetCollection();
 
-            CartService.RaiseEventOnCartChanged(totalTrips);
+                var cartItems = await ManageCartItemsLocalStorageService.GetCollection();
+                var totalTrips = cartItems.Count();
+
+                CartService.RaiseEventOnCartChanged(totalTrips);
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage = ex.Message;
+            }
+            
         }
 
         protected IOrderedEnumerable<IGrouping<int, TripDto>> GetGroupedTripsByCategory() 
@@ -35,6 +52,12 @@ namespace ExtremeVacation.Web.Pages
         protected string GetCategoryName(IGrouping<int, TripDto> groupedTripDtos) 
         {
             return groupedTripDtos.FirstOrDefault(tg => tg.CategoryId == groupedTripDtos.Key).CategoryName;
+        }
+
+        private async Task ClearLocalStorage()
+        {
+            await ManageTripsLocalStorageService.RemoveCollection();
+            await ManageCartItemsLocalStorageService.RemoveCollection();
         }
     }
 }

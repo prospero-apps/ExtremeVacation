@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExtremeVacation.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class TripController : ControllerBase
     {
@@ -23,15 +23,14 @@ namespace ExtremeVacation.Api.Controllers
             try
             {
                 var trips = await this.tripRepository.GetItems();
-                var tripCategories = await this.tripRepository.GetCategories();
 
-                if (trips == null || tripCategories == null)
+                if (trips == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    var tripDtos = trips.ConvertToDto(tripCategories);
+                    var tripDtos = trips.ConvertToDto();
                     return Ok(tripDtos);
                 }
 
@@ -56,8 +55,7 @@ namespace ExtremeVacation.Api.Controllers
                 }
                 else
                 {
-                    var tripCategory = await this.tripRepository.GetCategory(trip.CategoryId);
-                    var tripDto = trip.ConvertToDto(tripCategory);
+                    var tripDto = trip.ConvertToDto();
                     return Ok(tripDto);
                 }
 
@@ -94,8 +92,7 @@ namespace ExtremeVacation.Api.Controllers
             try
             {
                 var trips = await tripRepository.GetItemsByCategory(categoryId);
-                var tripCategories = await tripRepository.GetCategories();
-                var tripDtos = trips.ConvertToDto(tripCategories);
+                var tripDtos = trips.ConvertToDto();
 
                 return Ok(tripDtos);
             }

@@ -9,6 +9,9 @@ namespace ExtremeVacation.Web.Pages
         [Inject]
         public ICartService CartService { get; set; }
 
+        [Inject]
+        public IManageCartItemsLocalStorageService ManageCartItemsLocalStorageService { get; set; }
+
         public List<CartItemDto> CartItems { get; set; }
 
         public string ErrorMessage { get; set; }
@@ -19,7 +22,7 @@ namespace ExtremeVacation.Web.Pages
         {
             try
             {
-                CartItems = await CartService.GetItems(HardCodedData.UserId);
+                CartItems = await ManageCartItemsLocalStorageService.GetCollection();
                 CartChanged();
             }
             catch (Exception ex)
@@ -46,11 +49,13 @@ namespace ExtremeVacation.Web.Pages
             return CartItems.FirstOrDefault(i => i.Id == id);
         }
 
-        private void RemoveCartItem(int id)
+        private async Task RemoveCartItem(int id)
         {
             var cartItemDto = GetCartItem(id);
 
             CartItems.Remove(cartItemDto);
+
+            await ManageCartItemsLocalStorageService.SaveCollection(CartItems);
         }
 
         private void CartChanged()

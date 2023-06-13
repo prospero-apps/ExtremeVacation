@@ -8,8 +8,13 @@ namespace ExtremeVacation.Web.Pages
     {
         [Parameter]
         public int CategoryId { get; set; }
+
         [Inject]
         public ITripService TripService { get; set; }
+
+        [Inject]
+        public IManageTripsLocalStorageService ManageTripsLocalStorageService { get; set; }
+               
         public IEnumerable<TripDto> Trips { get; set; }
         public string CategoryName { get; set; }
         public string ErrorMessage { get; set; }
@@ -18,7 +23,7 @@ namespace ExtremeVacation.Web.Pages
         {
             try
             {
-                Trips = await TripService.GetItemsByCategory(CategoryId);
+                Trips = await GetTripCollectionByCategoryId(CategoryId);
 
                 if (Trips != null && Trips.Count() > 0)
                 {
@@ -32,6 +37,20 @@ namespace ExtremeVacation.Web.Pages
             catch (Exception ex)
             {
                 ErrorMessage = ex.Message;
+            }
+        }
+
+        private async Task<IEnumerable<TripDto>> GetTripCollectionByCategoryId(int categoryId)
+        {
+            var tripCollection = await ManageTripsLocalStorageService.GetCollection();
+
+            if (tripCollection != null)
+            {
+                return tripCollection.Where(t => t.CategoryId == categoryId);
+            }
+            else
+            {
+                return await TripService.GetItemsByCategory(categoryId);
             }
         }
     }

@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using ExtremeVacation.Web;
 using ExtremeVacation.Web.Services;
 using ExtremeVacation.Web.Services.Contracts;
@@ -17,6 +18,11 @@ namespace ExtremeVacation.Web
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/") });
             builder.Services.AddScoped<ITripService, TripService>();
             builder.Services.AddScoped<ICartService, CartService>();
+
+            builder.Services.AddBlazoredLocalStorage();
+
+            builder.Services.AddScoped<IManageTripsLocalStorageService, ManageTripsLocalStorageService>();
+            builder.Services.AddScoped<IManageCartItemsLocalStorageService, ManageCartItemsLocalStorageService>();
 
             await builder.Build().RunAsync();
         }
