@@ -35,7 +35,7 @@ namespace ExtremeVacation.Web.Pages
         {
             var cartItemDto = await CartService.DeleteItem(id);
 
-            RemoveCartItem(id);
+            await RemoveCartItem(id);
             CartChanged();
         }
                      

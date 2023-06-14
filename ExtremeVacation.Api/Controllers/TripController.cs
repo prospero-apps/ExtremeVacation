@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExtremeVacation.Api.Controllers
 {
-    [Route("api/")]
+    [Route("api/trips")]
     [ApiController]
     public class TripController : ControllerBase
     {
