@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExtremeVacation.Api.Controllers
 {
-    [Route("api/trips")]
     [ApiController]
+    [Route("api/[controller]")]    
     public class TripController : ControllerBase
     {
         private readonly ITripRepository tripRepository;

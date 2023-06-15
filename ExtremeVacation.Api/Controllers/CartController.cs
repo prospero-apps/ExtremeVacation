@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExtremeVacation.Api.Controllers
 {
-    [Route("api/cart")]
     [ApiController]
+    [Route("api/[controller]")]
     public class CartController : ControllerBase
     {
         private readonly ICartRepository cartRepository;

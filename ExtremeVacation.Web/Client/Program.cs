@@ -15,7 +15,7 @@ namespace ExtremeVacation.Web
             builder.RootComponents.Add<App>("#app");
             builder.RootComponents.Add<HeadOutlet>("head::after");
 
-            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/") });
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7077/") });
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://extremevacationapi20230612222347.azurewebsites.net/") });
 
 
@@ -26,7 +26,7 @@ namespace ExtremeVacation.Web
 //#endif
 
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
             builder.Services.AddScoped<ITripService, TripService>();
