@@ -36,7 +36,10 @@ namespace ExtremeVacation.Api
             }
 
             app.UseCors(policy =>
-                policy.WithOrigins("http://localhost:7162", "https://localhost:7162")
+                policy.WithOrigins("http://localhost:7162", 
+                    "https://localhost:7162", 
+                    "http://happy-water-095a43b10.3.azurestaticapps.net/", 
+                    "https://happy-water-095a43b10.3.azurestaticapps.net/")
                 .AllowAnyMethod()
                 .WithHeaders(HeaderNames.ContentType)
             );
