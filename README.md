@@ -64,5 +64,3 @@ For styling I used Bootstrap as well as some custom styles. The latter are added
 I also created a LoadingSpinner component that you can see while the data is being fetched from the API.
 
 The API project is deployed to Azure App Service and the Blazor WebAssembly project is deployed to Azure Static Web Apps.
-
-To see the website live go to https://happy-water-095a43b10.3.azurestaticapps.net/
